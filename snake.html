@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SnakeGame</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Snake</h1>
+    <div id="welcome">
+      <h2>Welcome, please select a speed and board size to begin</h2>
+      <form>
+        <select id="speed"></select>
+        <select id="size"></select>
+        <button type="button" id="begin" class="btn btn-primary">Begin</button>
+      </form>
+    </div>
+    <div id="grid"></div>
+
+    <script src="javascript/model.js" type="text/javascript"></script>
+    <script src="javascript/view.js" type="text/javascript"></script>
+    <script src="javascript/controller.js" type="text/javascript"></script>
+
+  </body>
+</html>
