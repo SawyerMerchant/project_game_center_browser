@@ -24,7 +24,7 @@ var controller = {
       // move tail
       model.moveTail();
       //renderSnake
-      view.renderSnake(model.buildSnake());
+      view.renderSnake();
       //check for direction change
       view.directionChange();
       //check for game pause

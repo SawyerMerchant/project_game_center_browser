@@ -17,8 +17,8 @@ var view = {
     }
   },
 
-  renderSnake: function(snake) {
-    var $snake = snake;
+  renderSnake: function() {
+    var $snake = model.snakeBody;
     for (var i = 0; i < $snake.length; i++) {
       $snake[i].addClass('snake');
     }

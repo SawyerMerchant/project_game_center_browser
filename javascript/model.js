@@ -4,8 +4,7 @@ var model = {
   height: 50,
   width: 50,
   snakeHead: [0,0],
-  // headID: $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]),
-  snakeBody: [[0,0]],
+  snakeBody: [$('#0_0')],
   direction: "r",
 
   buildID: function(coords) {
@@ -28,26 +27,26 @@ var model = {
         break;
       default:
     }
-    model.snakeBody.unshift(model.snakeBody);
+    $headID = model.buildID(model.snakeHead);
+    model.snakeBody.unshift($headID);
   },
 
   // use unshift for adding to head
 
-  buildSnake: function() {
-    var return_arr = [];
-    var $head = $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]);
-    return_arr.push($head);
-    for (var i = 0; i < model.snakeBody.length; i++) {
-      var $snakePart = $('#' + model.snakeBody[i][0] + '_' + model.snakeBody[i][1]);
-      return_arr.push($head);
-    }
-    return return_arr;
-  },
+  // buildSnake: function() {
+  //   var return_arr = [];
+  //   var $head = $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]);
+  //   return_arr.push($head);
+  //   for (var i = 0; i < model.snakeBody.length; i++) {
+  //     var $snakePart = model.buildID(model.snakeBody[i]);//$('#' + model.snakeBody[i][0] + '_' + model.snakeBody[i][1]);
+  //     return_arr.push($snakePart);
+  //   }
+  //   return return_arr;
+  // },
 
   moveTail: function() {
-    var removed = model.snakeBody.pop();
-    var removedID = model.buildID(removed);
-    view.clearTail(removedID);
+    var $removedID = model.snakeBody.pop();
+    view.clearTail($removedID);
   },
 
   gameOver: function() {
