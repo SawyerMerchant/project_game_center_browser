@@ -22,7 +22,7 @@ var controller = {
       }
       //check for eat food - pass true or false to move tail
       // move tail
-      model.moveTail();
+      model.moveTail(model.eatFood());
       //renderSnake
       view.renderSnake();
       //check for direction change

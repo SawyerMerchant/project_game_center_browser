@@ -31,22 +31,21 @@ var model = {
     model.snakeBody.unshift($headID);
   },
 
-  // use unshift for adding to head
+  eatFood: function() {
+    var ateFood = false;
+    var $head = model.buildID(model.snakeHead);
+    if ($head.hasClass('food')) {
+      $head.removeClass('food');
+      ateFood = true;
+    }
+    return ateFood;
+  },
 
-  // buildSnake: function() {
-  //   var return_arr = [];
-  //   var $head = $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]);
-  //   return_arr.push($head);
-  //   for (var i = 0; i < model.snakeBody.length; i++) {
-  //     var $snakePart = model.buildID(model.snakeBody[i]);//$('#' + model.snakeBody[i][0] + '_' + model.snakeBody[i][1]);
-  //     return_arr.push($snakePart);
-  //   }
-  //   return return_arr;
-  // },
-
-  moveTail: function() {
-    var $removedID = model.snakeBody.pop();
-    view.clearTail($removedID);
+  moveTail: function(food) {
+    if (!food) {
+      var $removedID = model.snakeBody.pop();
+      view.clearTail($removedID);
+    }
   },
 
   gameOver: function() {
