@@ -13,3 +13,12 @@
 .row {
   height: 10px;
 }
+
+#grid{
+  border: 2px solid red;
+  display: inline-block
+}
+
+.food{
+  background-color: orange;
+}

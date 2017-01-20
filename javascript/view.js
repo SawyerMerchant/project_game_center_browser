@@ -22,5 +22,43 @@ var view = {
     for (var i = 0; i < $snake.length; i++) {
       $snake[i].addClass('snake');
     }
-  }
+  },
+
+  directionChange: function() {
+    $(document).keydown(function(e) {
+      switch(e.which) {
+        case 37: // left
+          model.direction = "l";
+        break;
+
+        case 38: // up
+          model.direction = "u";
+        break;
+
+        case 39: // right
+          model.direction = "r";
+        break;
+
+        case 40: // down
+          model.direction = "d";
+        break;
+        default: return;
+      }
+      e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+  },
+
+  declareGameOver: function() {
+
+  },
+
+  renderFood: function(foodDiv) {
+    $(foodDiv).addClass('food');
+  },
+
+  clearTail: function(removed) {
+    removed.removeClass('snake');
+  },
+
+
 };
