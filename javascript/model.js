@@ -1,11 +1,35 @@
 var model = {
 
-  // make dynamic
-  height: 50,
-  width: 50,
   snakeHead: [0,0],
   snakeBody: [$('#0_0')],
   direction: "r",
+  score: 0,
+
+  sizeOptions: function() {
+    var pairOptions = [["Small", 20], ["Medium", 30], ["Large", 40]];
+    var $selector = $('#size');
+    $.each(pairOptions, function() {
+      $selector.append($("<option />").val(this[1])
+                                      .text(this[0])
+      );
+    });
+    $selector.selectpicker({
+      style: 'btn-primary',
+    });
+  },
+
+  speedOptions: function() {
+    var pairOptions = [["Slow", 200], ["Medium", 150], ["Fast", 100]];
+    var $selector = $('#speed');
+    $.each(pairOptions, function() {
+      $selector.append($("<option />").val(this[1])
+                                      .text(this[0])
+      );
+    });
+    $selector.selectpicker({
+      style: 'btn-primary',
+    });
+  },
 
   buildID: function(coords) {
     return $('#' + coords[0] + '_' + coords[1]);
@@ -47,13 +71,13 @@ var model = {
       view.clearTail($removedID);
     }
   },
-
+// TODO make smaller methods
   gameOver: function() {
     var gameOver = false;
     //hit right wall
-    if (model.snakeHead[0] > (model.width - 1)
+    if (model.snakeHead[0] > (model.size - 1)
     //hit bottom wall
-     || model.snakeHead[1] > (model.height - 1)
+     || model.snakeHead[1] > (model.size - 1)
     //hit left wall
      || model.snakeHead[0] < 0
     //hit top wall
@@ -68,12 +92,17 @@ var model = {
 
   setFood: function() {
     if ($('.food').length < 1) {
-      $blanks = $('div').not(".snake");
+      $blanks = $('.cell').not(".snake");
       var $food = $blanks[Math.floor(Math.random()*$blanks.length)];
       view.renderFood($food);
     }
   },
 
-
-
+  replay: function() {
+    view.replay();
+    model.snakeHead = [0,0];
+    model.snakeBody = [$('#0_0')];
+    model.direction = "r";
+    model.score = 0;
+  }
 };

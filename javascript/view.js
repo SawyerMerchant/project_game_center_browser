@@ -1,15 +1,25 @@
 var view = {
 
   initialize: function() {
-    view.renderGrid();
+    // $('.score-board').hide();
+    model.sizeOptions();
+    model.speedOptions();
   },
 
-  renderGrid: function() {
+  initializeBoard: function(size) {
+    $('#messages').hide("slow");
+    $('#welcome').hide("slow");
+    view.renderGrid(size);
+    $('.score-board').show("slow");
+    $('#grid').addClass('active');
+  },
+
+  renderGrid: function(size) {
     var $grid = $('#grid');
-    for (var y = 0; y < model.height; y++) {
-      var $currentRow = $('<div>').addClass('row');
+    for (var y = 0; y < size; y++) {
+      var $currentRow = $('<div>').addClass('cell-row');
       $currentRow.appendTo($grid);
-      for (var x = 0; x < model.width; x++) {
+      for (var x = 0; x < size; x++) {
         var $cell = $('<div>').addClass('cell')
                              .attr('id', x + '_' + y);
         $cell.appendTo($currentRow);
@@ -49,7 +59,7 @@ var view = {
   },
 
   declareGameOver: function() {
-
+    $('#replay').show("slow");
   },
 
   renderFood: function(foodDiv) {
@@ -60,5 +70,24 @@ var view = {
     removed.removeClass('snake');
   },
 
+  updateScore: function() {
+    $scoreBoard = $('h1', '.score-board');
+    $('.score').remove();
+    $score = $('<span class="score">' + (model.snakeBody.length - 2) + '</span>');
+    $scoreBoard.append($score);
+    $scoreBoard.show("slow");
+  },
 
+  replay: function() {
+
+    // remove active from grid
+    $('#grid').removeClass('active')
+              .empty();
+    // hide replay
+    $('#replay').hide('slow');
+    // show welcome
+    $('#welcome').show('slow');
+    // hide score
+    $('.score-board').hide('slow');
+  },
 };

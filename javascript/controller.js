@@ -3,7 +3,13 @@ var controller = {
   initialize: function() {
     view.initialize();
     $('#begin').on('click', function(){
+      model.speed = $('#speed').val();
+      model.size = $('#size').val();
+      view.initializeBoard(model.size);
       controller.startGame();
+    });
+    $('#restart').on('click', function() {
+      model.replay();
     });
   },
 
@@ -19,8 +25,9 @@ var controller = {
       if (model.gameOver()) {
         // view.declareGameOver();
         clearInterval(game);
+        view.declareGameOver();
       }
-      //check for eat food - pass true or false to move tail
+      view.updateScore();
       // move tail
       model.moveTail(model.eatFood());
       //renderSnake
@@ -28,12 +35,9 @@ var controller = {
       //check for direction change
       view.directionChange();
       //check for game pause
-    }, 150);
+    }, model.speed);
   },
-
-
 };
-
 
 $(function() {
   controller.initialize();
