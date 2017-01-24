@@ -71,20 +71,50 @@ var model = {
       view.clearTail($removedID);
     }
   },
-// TODO make smaller methods
+
+  hitRight: function() {
+    var right = false;
+    if (model.snakeHead[0] > (model.size - 1) ) {
+      right = true;
+    }
+    return right;
+  },
+
+  hitBottom: function() {
+    var bottom = false;
+    if (model.snakeHead[1] > (model.size - 1) ) {
+      bottom = true;
+    }
+    return bottom;
+  },
+
+  hitLeft: function() {
+    var left = false;
+    if ( model.snakeHead[0] < 0 ) {
+      left = true;
+    }
+    return left;
+  },
+
+  hitTop: function() {
+    var top = false;
+    if ( model.snakeHead[1] < 0 ) {
+      top = true;
+    }
+    return top;
+  },
+
+  hitSelf: function() {
+    var selfCrash = false;
+    if ( $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]).hasClass('snake') ) {
+      selfCrash = true;
+    }
+    return selfCrash;
+  },
+
   gameOver: function() {
     var gameOver = false;
-    //hit right wall
-    if (model.snakeHead[0] > (model.size - 1)
-    //hit bottom wall
-     || model.snakeHead[1] > (model.size - 1)
-    //hit left wall
-     || model.snakeHead[0] < 0
-    //hit top wall
-     || model.snakeHead[1] < 0
-    //hit self
-     || $('#' + this.snakeHead[0] + '_' + this.snakeHead[1]).hasClass('snake')
-    ) {
+    if ( model.hitRight() || model.hitBottom() || model.hitLeft() || model.hitTop() || model.hitSelf() ) {
       gameOver = true;
     }
     return gameOver;
